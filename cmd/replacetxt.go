@@ -37,6 +37,10 @@ var replacetxtCmd = &cobra.Command{
 	Long:  `Replace selected text in any files in the system with a set extension or name`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("replacetxt called")
+		fmt.Println(Path)
+		fmt.Println(Search)
+		fmt.Println(OldTxt)
+		fmt.Println(NewTxt)
 		files, err := WalkMatch(Path, Search)
 		if err != nil {
 			fmt.Println(err)
@@ -58,14 +62,13 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// replacetxtCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	replacetxtCmd.Flags().StringVarP(&Path, "path", "p", "", "The path the system should walk")
+	replacetxtCmd.Flags().StringVarP(&Path, "path", "p", "C:\\Users", "The path the system should walk")
 	replacetxtCmd.Flags().StringVarP(&Search, "search", "s", "", "The search that should be used when selecting files for instance *.rdp will select just rdp files")
 	replacetxtCmd.Flags().StringVarP(&OldTxt, "old", "o", "", "The old text to replace")
 	replacetxtCmd.Flags().StringVarP(&NewTxt, "new", "n", "", "The text that old should be replaced with")
-	replacetxtCmd.MarkFlagRequired("path")
 	replacetxtCmd.MarkFlagRequired("search")
 	replacetxtCmd.MarkFlagRequired("old")
-	replacetxtCmd.MarkFlagRequired("path")
+	replacetxtCmd.MarkFlagRequired("new")
 }
 
 func CheckFiles(files []string, oldStr string, newStr string) {
